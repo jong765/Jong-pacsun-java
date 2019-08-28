@@ -1,0 +1,1224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="https://www.hingeto.com/xml/V0.1" elementFormDefault="qualified"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="https://www.hingeto.com/xml/V0.1">
+    <xsd:element name="feed">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Header" type="Header"/>
+                <xsd:choice>
+                    <xsd:element name="Products" type="ProductContentList"/>
+                    <xsd:element name="ImageURLs" type="ImageURLList"/>
+                    <xsd:element name="CategoryAssignments" type="CategoryAssignmentList"/>
+                    <xsd:element name="Listings" type="ListingList"/>
+                    <xsd:element name="FullProducts" type="FullProductList"/>
+                    <xsd:element name="Orders" type="OrderList"/>
+                    <xsd:element name="RMAs" type="RMAList"/>
+                    <xsd:element name="RefundRequests" type="RefundRequestList"/>
+                    <xsd:element name="Refunds" type="RefundList"/>
+                    <xsd:element name="Returns" type="ReturnList"/>
+                    <xsd:element name="OrderStatus" type="OrderStatusList"/>
+                    <xsd:element name="StorefrontTree" type="StorefrontTree"/>
+                    <xsd:element name="ShippingCalculations" type="ShippingCalculationList"/>
+                    <xsd:element name="ProcessingResponse" type="ProcessingResponse"/>
+                    <xsd:element name="NewProductAuthorization" type="ProductContentList"/>
+                    <xsd:element name="NewProductAuthorizationResponse" type="NewProductAuthorizationResponse"/>
+                    <xsd:element name="ProductResponse" type="ProductResponse"/>
+                    <xsd:element name="ListingResponse" type="ListingResponse"/>
+                    <xsd:element name="Suppliers" type="SupplierList"/>
+                    <xsd:element name="SupplierCommissions" type="SupplierCommissionList"/>
+                    <xsd:element name="validationResults" type="validationResults"/>
+                </xsd:choice>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- lists -->
+    <xsd:complexType name="FullProductList">
+        <xsd:sequence>
+            <xsd:element name="FullProduct" maxOccurs="unbounded" type="FullProductMessage"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ProductContentList">
+        <xsd:sequence>
+            <xsd:element name="ProductContentMessage" maxOccurs="unbounded" type="ContentMessage"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="CategoryAssignmentList">
+        <xsd:sequence>
+            <xsd:element name="CategoryAssignment" maxOccurs="unbounded" type="CategoryAssignmentMessage"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ImageURLList">
+        <xsd:sequence>
+            <xsd:element name="ImageURL" maxOccurs="unbounded" type="ImageURLMessage"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ListingList">
+        <xsd:sequence>
+            <xsd:element name="Listing" maxOccurs="unbounded" type="ListingMessage"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="OrderList">
+        <xsd:sequence>
+            <xsd:element name="SalesOrder" type="SalesOrderMessage" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RMAList">
+        <xsd:sequence>
+            <xsd:element name="RMAMessage" type="RMAMessage" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RefundRequestList">
+        <xsd:sequence>
+            <xsd:element name="RefundRequest" type="RefundRequestMessage" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RefundList">
+        <xsd:sequence>
+            <xsd:element name="Refund" type="RefundMessage" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ReturnList">
+        <xsd:sequence>
+            <xsd:element name="Return" type="ReturnMessage" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="OrderStatusList">
+        <xsd:sequence>
+            <xsd:element name="OrderStatus" type="OrderStatusMessage" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SupplierList">
+        <xsd:sequence>
+            <xsd:element name="Supplier" type="SupplierMessage" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SupplierCommissionList">
+        <xsd:sequence>
+            <xsd:element name="SupplierCommission" type="SupplierCommissionMessage" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <!-- product messages -->
+    <xsd:complexType name="FullProductMessage">
+        <xsd:complexContent>
+            <xsd:extension base="ContentMessage">
+                <xsd:sequence>
+                    <xsd:element name="PriceData" minOccurs="0" type="PriceData"/>
+                    <xsd:element name="ShippingData" minOccurs="0" type="ShippingData"/>
+                    <xsd:element name="InventoryData" minOccurs="0" type="InventoryData"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ContentMessage">
+        <xsd:complexContent>
+            <xsd:extension base="ProductMessage">
+                <xsd:sequence>
+                    <xsd:element name="ProductContent" type="ProductContentType"/>
+                </xsd:sequence>
+                <xsd:attribute name="action" type="MessageAction" use="optional" default="update"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ProductContentType">
+        <xsd:sequence>
+            <xsd:element name="OnlineFlag" type="xsd:boolean"/>
+            <xsd:element name="ProductData" minOccurs="0" type="ProductData"/>
+            <xsd:element name="ImageURLData" minOccurs="0" type="ImageURLData"/>
+            <xsd:element name="CategoryAssignmentData" minOccurs="0" type="CategoryAssignmentData"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ListingMessage">
+        <xsd:complexContent>
+            <xsd:extension base="Message">
+                <xsd:sequence>
+                    <xsd:element name="ProductReference" type="CatalogProductReference"/>
+                    <xsd:element name="ListingSource" type="ListingSource"/>
+                    <xsd:element name="ListingOnlineFlag" type="xsd:boolean"/>
+                    <xsd:element name="InventoryData" type="InventoryData" minOccurs="0"/>
+                    <xsd:element name="PriceData" type="PriceData" minOccurs="0"/>
+                    <xsd:element name="ShippingData" type="ShippingData" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="action" type="MessageAction" use="optional" default="update"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ImageURLMessage">
+        <xsd:complexContent>
+            <xsd:extension base="ProductMessage">
+                <xsd:sequence>
+                    <xsd:element name="ImageURLData" type="ImageURLData"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="CategoryAssignmentMessage">
+        <xsd:complexContent>
+            <xsd:extension base="ProductMessage">
+                <xsd:sequence>
+                    <xsd:element name="CategoryAssignmentData" type="CategoryAssignmentData"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <!-- product data -->
+    <xsd:complexType name="ProductData">
+        <xsd:sequence>
+            <xsd:element name="ProductIDs" minOccurs="0" type="ProductIDs"/>
+            <xsd:element name="VariationType" type="VariationType"/>
+            <xsd:element name="Variations" type="Variations" minOccurs="0"/>
+            <xsd:element name="Title" type="NamedLocalizedAttribute"/>
+            <xsd:element name="Description" type="NamedLocalizedAttribute" minOccurs="0"/>
+            <xsd:element name="ShortDescription" type="NamedLocalizedAttribute" minOccurs="0"/>
+            <xsd:element name="BulletPoints" type="NamedLocalizedAttributeList" minOccurs="0"/>
+            <xsd:element name="Brand" type="NamedAttribute" minOccurs="0"/>
+            <xsd:element name="Manufacturer" type="NamedAttribute" minOccurs="0"/>
+            <xsd:element name="MfrPartNumber" type="NamedAttribute" minOccurs="0"/>
+            <xsd:element name="Dimensions" type="Dimensions" minOccurs="0"/>
+            <xsd:element name="Attribute" type="ProductAttribute" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="LocalizedAttribute" type="ProductLocalizedAttribute" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="AttributeList" type="ProductAttributeList" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="LocalizedAttributeList" type="ProductLocalizedAttributeList" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="InventoryData">
+        <xsd:sequence>
+            <xsd:element name="Quantity" type="xsd:integer"/>
+            <!-- <xsd:element name="FulfillmentLatency" type="xsd:integer"/> -->
+            <xsd:element name="CustomAttributes" type="CustomAttributes" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ImageURLData">
+        <xsd:sequence>
+            <xsd:element name="ImageURL" type="ImageURL" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="CategoryAssignmentData">
+        <xsd:sequence>
+            <xsd:element name="CategoryAssignment" type="CategoryAssignment" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PriceData">
+        <xsd:sequence>
+            <xsd:element name="TaxClass" type="TaxClassType" minOccurs="0"/>
+            <xsd:element name="DisposalFee" type="DisposalFeeType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="ListPrice" type="CurrencyPrice" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="MSRP" type="CurrencyPrice" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="SalePrice" type="SalePrice" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="BasicCost" type="CurrencyPrice" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="StrikeThroughPrice" type="CurrencyPrice" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="MAPPrice" type="CurrencyPrice" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="DropshipFee" type="CurrencyPrice" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="CustomAttributes" type="CustomAttributes" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ShippingData">
+        <xsd:sequence>
+            <xsd:element name="ShippingPrice" type="ShippingPrice" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Dimensions">
+        <xsd:sequence>
+            <xsd:element name="ItemDimensionsLength" minOccurs="0" type="xsd:decimal"/>
+            <xsd:element name="ItemDimensionsWidth" minOccurs="0" type="xsd:decimal"/>
+            <xsd:element name="ItemDimensionsHeight" minOccurs="0" type="xsd:decimal"/>
+            <xsd:element name="DimensionsUnit" type="DimensionsUnit"/>
+            <xsd:element name="ShippingWeight" minOccurs="0" type="xsd:decimal"/>
+            <xsd:element name="WeightUnit" type="WeightUnit"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="VariationType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Parent"/>
+            <xsd:enumeration value="Product"/>
+            <!-- child or single -->
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="Variations">
+        <xsd:sequence>
+            <xsd:element name="VariationTheme" type="VariationTheme"/>
+            <xsd:element name="Variation" type="VariationChildren" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="VariationTheme">
+        <xsd:sequence>
+            <xsd:element name="VariationAttributeName" type="VariationAttributeName" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="VariationAttributeName">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="localized" type="xsd:boolean" default="false" use="optional"/>
+                <xsd:attribute name="displayName" type="xsd:string" use="optional"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="VariationChildren">
+        <xsd:sequence>
+            <xsd:element name="VariationSKU" type="ProductSKU"/>
+            <xsd:element name="VariationStorefrontProductID" type="StorefrontProductIDType" minOccurs="0"/>
+            <xsd:element name="VariationContent" type="ProductContentType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ImageURL">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="imageType" use="required" type="xsd:string"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="CategoryAssignment">
+        <xsd:sequence>
+            <xsd:element name="CategoryID" type="xsd:string"/>
+            <xsd:element name="CategoryName" type="CategoryName" maxOccurs="unbounded"/>
+            <xsd:element name="SortOrder" type="xsd:integer" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="SalePrice">
+        <xsd:sequence>
+            <xsd:element name="Price" type="CurrencyPrice"/>
+            <xsd:element name="StartDate" type="xsd:dateTime"/>
+            <xsd:element name="EndDate" type="xsd:dateTime"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ShippingPrice">
+        <xsd:sequence>
+            <xsd:element name="ShippingFee" type="CurrencyPrice"/>
+            <xsd:element name="ShippingOption" type="xsd:string"/>
+            <!-- service level -->
+            <xsd:element name="DestinationArea" type="xsd:string"/>
+            <xsd:element name="FulfillmentLatency" type="xsd:string"/>
+            <xsd:element name="DeliveryMinDays" type="xsd:integer" minOccurs="0"/>
+            <xsd:element name="DeliveryMaxDays" type="xsd:integer" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- order messages -->
+    <xsd:complexType name="SalesOrderMessage">
+        <xsd:complexContent>
+            <xsd:extension base="Message">
+                <xsd:sequence>
+                    <xsd:element name="OrderID" type="OrderID"/>
+                    <xsd:element name="OrderDate" type="xsd:dateTime"/>
+                    <xsd:element name="Currency" type="CurrencyCode"/>
+                    <xsd:element name="BillingData" type="BillingData" minOccurs="0"/>
+                    <xsd:element name="FulfillmentData" type="FulfillmentData"/>
+                    <xsd:element name="OrderAttributes" type="OrderAttributes" minOccurs="0"/>
+                    <xsd:element name="OrderItem" maxOccurs="unbounded" type="OrderItem"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="OrderItem">
+        <xsd:sequence>
+            <xsd:element name="OrderItemCode" type="OrderItemCode"/>
+            <xsd:element name="StoreFrontLineItemID" type="StoreFrontLineItem"/>
+            <xsd:element name="OrderItemStatus" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="ListingID" type="ListingIDType"/>
+            <xsd:element name="Title" type="String255" minOccurs="0"/>
+            <xsd:element name="Quantity" type="xsd:positiveInteger"/>
+            <xsd:element name="GiftWrapLevel" type="String255" minOccurs="0"/>
+            <xsd:element name="GiftMessageText" type="String255" minOccurs="0"/>
+            <xsd:element name="ItemPrices" type="OrderItemPrices"/>
+            <xsd:element name="ItemDiscounts" type="OrderItemPrices" minOccurs="0"/>
+            <xsd:element name="ItemAttributes" type="OrderAttributes" minOccurs="0"/>
+            <xsd:element name="ShippingAddress" type="Address" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="OrderItemPrices">
+        <xsd:sequence>
+            <xsd:element name="Price" type="OrderItemPrice" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="OrderItemPrice">
+        <xsd:simpleContent>
+            <xsd:extension base="BasePriceAmount">
+                <xsd:attribute name="type" type="OrderItemPriceType" use="required"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:simpleType name="CommissionRate">
+        <xsd:restriction base="xsd:decimal">
+            <xsd:totalDigits value="5"/>
+            <xsd:fractionDigits value="2"/>
+            <xsd:maxExclusive value="100"/>
+            <xsd:minInclusive value="0"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="BillingData">
+        <xsd:sequence>
+            <xsd:element name="BuyerEmailAddress" type="BuyerEmailAddress" minOccurs="0"/>
+            <xsd:element name="BuyerName" type="String255" minOccurs="0"/>
+            <xsd:element name="BuyerPhoneNumber" type="String255" minOccurs="0"/>
+            <xsd:element name="PaymentInfo" type="String255" minOccurs="0"/>
+            <xsd:element name="BillingAddress" type="Address" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="FulfillmentData">
+        <xsd:sequence>
+            <xsd:element name="ShippingOption" type="String255"/>
+            <!-- service level -->
+            <xsd:element name="FulfillmentAddress" type="Address" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Address">
+        <xsd:sequence>
+            <xsd:element name="Name" type="String255" minOccurs="0"/>
+            <xsd:element name="AddressFieldOne" type="String255" minOccurs="0"/>
+            <xsd:element name="AddressFieldTwo" type="String255" minOccurs="0"/>
+            <xsd:element name="AddressFieldThree" type="String255" minOccurs="0"/>
+            <xsd:element name="City" type="String255" minOccurs="0"/>
+            <xsd:element name="StateOrRegion" type="String255" minOccurs="0"/>
+            <xsd:element name="PostalCode" type="String255" minOccurs="0"/>
+            <xsd:element name="CountryCode" type="CountryCode" minOccurs="0"/>
+            <xsd:element name="PhoneNumber" type="String255" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="RMAMessage">
+        <xsd:complexContent>
+            <xsd:extension base="Message">
+                <xsd:sequence>
+                    <xsd:element name="OrderID" type="OrderID"/>
+                    <xsd:element name="RMA" type="xsd:string"/>
+                    <xsd:element name="RMADate" type="xsd:dateTime" minOccurs="0"/>
+                    <xsd:element name="ReturnReason" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="RMAItem" type="RMAItem" maxOccurs="unbounded"/>
+                    <xsd:element name="RMAAttributes" type="OrderAttributes" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="RMAItem">
+        <xsd:sequence>
+            <xsd:choice>
+                <xsd:element name="ListingID" type="ListingIDType"/>
+                <xsd:element name="OrderItemCode" type="OrderItemCode"/>
+            </xsd:choice>
+            <xsd:element name="Quantity" type="xsd:nonNegativeInteger"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="RefundRequestMessage">
+        <xsd:complexContent>
+            <xsd:extension base="Message">
+                <xsd:sequence>
+                    <xsd:element name="RequestId" type="xsd:string"/>
+                    <xsd:element name="RefundDate" type="xsd:dateTime"/>
+                    <xsd:element name="OrderID" type="OrderID"/>
+                    <xsd:element name="OrderItemID" type="OrderItemCode"/>
+                    <xsd:element name="Currency" type="CurrencyCode"/>
+                    <xsd:element name="RefundAmount" type="BasePriceAmount"/>
+                    <xsd:element name="RefundType" type="RefundType"/>
+                    <xsd:element name="RefundRequestAttributes" type="OrderAttributes" minOccurs="0"/>
+                    <xsd:element name="ListingID" type="ListingIDType" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:simpleType name="RefundType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Returned"/>
+            <xsd:enumeration value="Missing"/>
+            <xsd:enumeration value="Refused"/>
+            <xsd:enumeration value="Resellable"/>
+            <xsd:enumeration value="NotSellable"/>
+            <xsd:enumeration value="Damaged"/>
+            <xsd:enumeration value="Defective"/>
+            <xsd:enumeration value="Other"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="RefundMessage">
+        <xsd:complexContent>
+            <xsd:extension base="Message">
+                <xsd:sequence>
+                    <xsd:element name="RequestId" type="xsd:string"/>
+                    <xsd:element name="RefundDate" type="xsd:dateTime"/>
+                    <xsd:element name="OrderID" type="OrderID"/>
+                    <xsd:element name="OrderItemID" type="OrderItemCode"/>
+                    <xsd:element name="ProcessingStatus" type="RefundProcessingStatus"/>
+                    <xsd:choice>
+                        <xsd:element name="RefundConfirmation" type="RefundConfirmationMessage"/>
+                        <xsd:element name="RefundRejection" type="RefundRejectionMessage"/>
+                        <xsd:element name="RefundProcessingMessage" type="RefundProcessingMessage"/>
+                    </xsd:choice>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="RefundConfirmationMessage">
+        <xsd:sequence>
+            <xsd:element name="Currency" type="CurrencyCode"/>
+            <xsd:element name="RefundAmount" type="BasePriceAmount"/>
+            <xsd:element name="RefundAttributes" type="OrderAttributes" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="RefundRejectionMessage">
+        <xsd:sequence>
+            <xsd:element name="Reason" type="xsd:string"/>
+            <xsd:element name="RefundAttributes" type="OrderAttributes" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="RefundProcessingMessage">
+        <xsd:sequence>
+            <xsd:element name="Message" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="RefundProcessingStatus">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Refunded"/>
+            <xsd:enumeration value="Rejected"/>
+            <xsd:enumeration value="Processing"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="ReturnMessage">
+        <xsd:complexContent>
+            <xsd:extension base="Message">
+                <xsd:sequence>
+                    <xsd:element name="OrderID" type="OrderID"/>
+                    <xsd:element name="OrderItemID" type="OrderItemCode"/>
+                    <xsd:element name="ReturnId" type="xsd:string"/>
+                    <xsd:element name="ReturnDate" type="xsd:dateTime"/>
+                    <xsd:element name="RMA" type="xsd:string"/>
+                    <xsd:element name="ListingID" type="ListingIDType"/>
+                    <xsd:element name="RMADate" type="xsd:dateTime" minOccurs="0"/>
+                    <xsd:element name="ReturnReason" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="Quantity" type="xsd:nonNegativeInteger"/>
+                    <xsd:element name="ReturnAttributes" type="OrderAttributes" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="OrderStatusMessage">
+        <xsd:complexContent>
+            <xsd:extension base="Message">
+                <xsd:sequence>
+                    <xsd:element name="OrderID" type="OrderID"/>
+                    <xsd:element name="PONumber" type="String255"/>
+                    <xsd:element name="StatusUpdateDate" type="xsd:dateTime"/>
+                    <xsd:choice>
+                        <xsd:element name="OrderFulfillment" type="OrderFulfillment"/>
+                        <xsd:element name="OrderCancellation" type="OrderCancellation"/>
+                        <xsd:element name="OrderState" type="OrderState"/>
+                    </xsd:choice>
+                    <xsd:element name="OrderStatusAttributes" type="OrderAttributes" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="OrderFulfillment">
+        <xsd:sequence>
+            <xsd:element name="CarrierCode" type="String255" minOccurs="0"/>
+            <xsd:element name="CarrierName" type="String255" minOccurs="0"/>
+            <xsd:element name="ShippingMethod" type="String255" minOccurs="0"/>
+            <xsd:element name="TrackingNumber" type="String255" minOccurs="0"/>
+            <xsd:element name="TrackingURL" type="String4K" minOccurs="0"/>
+            <xsd:element name="FulfillmentItem" type="FulfillmentItem" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FulfillmentItem">
+        <xsd:sequence>
+            <xsd:element name="OrderItemCode" type="OrderItemCode"/>
+            <xsd:element name="StoreFrontLineItemID" type="StoreFrontLineItem"/>
+            <xsd:element name="ReturnNumber" type="ReturnNumber"/>
+            <xsd:element name="ListingID" type="ListingIDType"/>
+            <xsd:element name="Quantity" type="xsd:positiveInteger"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="OrderCancellation">
+        <xsd:sequence>
+            <xsd:element name="CancelReason" type="String255" minOccurs="0"/>
+            <xsd:element name="CancellationItem" type="CancellationItem" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="CancellationItem">
+        <xsd:sequence>
+            <xsd:element name="OrderItemCode" type="OrderItemCode"/>
+            <xsd:element name="StoreFrontLineItemID" type="StoreFrontLineItem"/>
+            <xsd:element name="ListingID" type="ListingIDType"/>
+            <xsd:element name="CancelReason" type="String255" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="OrderState">
+        <xsd:sequence>
+            <xsd:element name="State" type="String255"/>
+            <xsd:element name="Message" type="String255" minOccurs="0"/>
+            <xsd:element name="StateItem" type="StateItem" maxOccurs="unbounded" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="StateItem">
+        <xsd:sequence>
+            <xsd:element name="OrderItemCode" type="OrderItemCode"/>
+            <xsd:element name="StoreFrontLineItemID" type="StoreFrontLineItem"/>
+            <xsd:element name="ListingID" type="ListingIDType"/>
+            <xsd:element name="Quantity" type="xsd:positiveInteger"/>
+            <xsd:element name="State" type="String255"/>
+            <xsd:element name="Message" type="String255" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="OrderAttributes">
+        <xsd:sequence>
+            <xsd:element name="OrderAttribute" type="OrderAttribute" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="OrderAttribute">
+        <xsd:simpleContent>
+            <xsd:extension base="String4K">
+                <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <!-- settings -->
+    <xsd:complexType name="StorefrontTree">
+        <xsd:complexContent>
+            <xsd:extension base="Message">
+                <xsd:sequence>
+                    <xsd:element name="PreferredLanguage" type="LanguageCode"/>
+                    <xsd:element name="Category" type="StorefrontCategory" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="StorefrontCategory">
+        <xsd:sequence>
+            <xsd:element name="ParentID" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="ID" type="xsd:string"/>
+            <xsd:element name="CategoryName" type="CategoryName" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ShippingCalculationList">
+        <xsd:sequence>
+            <xsd:element name="ShippingOptionMessage" type="ShippingOptionMessage" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ShippingOptionMessage">
+        <xsd:complexContent>
+            <xsd:extension base="Message">
+                <xsd:sequence>
+                    <xsd:element name="OptionName" type="xsd:string"/>
+                    <xsd:element name="DaysRange" type="xsd:string"/>
+                    <xsd:element name="ShippingCostModel" type="ShippingCostModel"/>
+                    <xsd:element name="ModelUnit" type="ShippingModelUnits" minOccurs="0"/>
+                    <xsd:element name="ShippingModel" type="ShippingModel" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ShippingModel">
+        <xsd:sequence>
+            <xsd:element name="Currency" type="CurrencyCode"/>
+            <xsd:element name="ShippingBand" type="ShippingBand" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ShippingBand">
+        <xsd:sequence>
+            <xsd:element name="From" type="xsd:decimal"/>
+            <xsd:element name="To" type="xsd:decimal" minOccurs="0"/>
+            <xsd:element name="Fee" type="BasePriceAmount"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="ShippingCostModel">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Don't Calculate"/>
+            <xsd:enumeration value="Fixed"/>
+            <xsd:enumeration value="Weight"/>
+            <xsd:enumeration value="Price"/>
+            <xsd:enumeration value="Volume"/>
+            <xsd:enumeration value="BySupplier"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="ShippingModelUnits">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="MM"/>
+            <xsd:enumeration value="CM"/>
+            <xsd:enumeration value="M"/>
+            <xsd:enumeration value="IN"/>
+            <xsd:enumeration value="FT"/>
+            <xsd:enumeration value="MM^3"/>
+            <xsd:enumeration value="CM^3"/>
+            <xsd:enumeration value="M^3"/>
+            <xsd:enumeration value="IN^3"/>
+            <xsd:enumeration value="FT^3"/>
+            <xsd:enumeration value="GR"/>
+            <xsd:enumeration value="KG"/>
+            <xsd:enumeration value="OZ"/>
+            <xsd:enumeration value="LB"/>
+            <xsd:enumeration value="n/a"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="SupplierMessage">
+        <xsd:complexContent>
+            <xsd:extension base="Message">
+                <xsd:sequence>
+                    <xsd:element name="SupplierID" type="xsd:string"/>
+                    <xsd:element name="SupplierEffectiveID" type="xsd:string"/>
+                    <xsd:element name="SupplierName" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="SupplierDescription" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="FullBusinessName" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="CompanyAddress" type="Address" minOccurs="0"/>
+                    <xsd:element name="ContactFirstName" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="ContactLastName" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="ContactPhone" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="ContactEmail" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="NotificationEmail" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="ContentRank" type="xsd:decimal" minOccurs="0"/>
+                    <xsd:element name="PerformanceRank" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="DefaultCommission" type="xsd:decimal" minOccurs="0"/>
+                    <xsd:element name="ShipWindow" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="SupplierAttributes" type="SupplierAttributes" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="SupplierAttributes">
+        <xsd:sequence>
+            <xsd:element name="SupplierAttribute" type="SupplierAttribute" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SupplierAttribute">
+        <xsd:simpleContent>
+            <xsd:extension base="String4K">
+                <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="SupplierCommissionMessage">
+        <xsd:complexContent>
+            <xsd:extension base="Message">
+                <xsd:sequence>
+                    <xsd:element name="SupplierID" type="xsd:string"/>
+                    <xsd:element name="SupplierEffectiveID" type="xsd:string"/>
+                    <xsd:element name="SupplierName" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="DefaultCommission" type="xsd:decimal" minOccurs="0"/>
+                    <xsd:element name="FullRefreshFlag" type="xsd:boolean" default="true"/>
+                    <xsd:element name="CategoryCommission" type="CategoryCommissionType" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="CategoryCommissionType">
+        <xsd:sequence>
+            <xsd:element name="CategoryID" type="xsd:string"/>
+            <xsd:element name="CategoryName" type="CategoryName" maxOccurs="unbounded"/>
+            <xsd:element name="CommissionRate" type="CommissionRate" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- misc. elements -->
+    <xsd:simpleType name="ProductSKU">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="255"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ListingIdValue">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="768"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="StorefrontProductIDType">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="255"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="OrderID">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="OrderItemCode">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="StoreFrontLineItem">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ReturnNumber">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="String4K">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4000"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="String255">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="255"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="ProductAttribute">
+        <xsd:complexContent>
+            <xsd:extension base="NamedAttribute">
+                <xsd:attribute name="domain" type="AttributeDomain" use="required"/>
+                <xsd:attribute name="name" type="String255" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ProductLocalizedAttribute">
+        <xsd:complexContent>
+            <xsd:extension base="NamedLocalizedAttribute">
+                <xsd:attribute name="domain" type="AttributeDomain" use="required"/>
+                <xsd:attribute name="name" type="String255" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ProductAttributeList">
+        <xsd:complexContent>
+            <xsd:extension base="NamedAttributeList">
+                <xsd:attribute name="domain" type="AttributeDomain" use="required"/>
+                <xsd:attribute name="name" type="String255" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ProductLocalizedAttributeList">
+        <xsd:complexContent>
+            <xsd:extension base="NamedLocalizedAttributeList">
+                <xsd:attribute name="domain" type="AttributeDomain" use="required"/>
+                <xsd:attribute name="name" type="String255" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="CustomAttributes">
+        <xsd:sequence>
+            <xsd:element name="Attribute" type="CustomAttribute" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="CustomAttribute">
+        <xsd:complexContent>
+            <xsd:extension base="NamedLocalizedAttribute">
+                <xsd:attribute name="name" type="String255" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="NamedAttribute">
+        <xsd:simpleContent>
+            <xsd:extension base="String4K"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="NamedLocalizedAttribute">
+        <xsd:sequence>
+            <xsd:element name="value" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:simpleContent>
+                        <xsd:extension base="String4K">
+                            <xsd:attribute name="lang" type="LanguageCode" use="required"/>
+                        </xsd:extension>
+                    </xsd:simpleContent>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="NamedAttributeList">
+        <xsd:sequence>
+            <xsd:element name="values">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="value" maxOccurs="unbounded" type="String4K"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="NamedLocalizedAttributeList">
+        <xsd:sequence>
+            <xsd:element name="values" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="value" maxOccurs="unbounded" type="String4K"/>
+                    </xsd:sequence>
+                    <xsd:attribute name="lang" type="LanguageCode" use="required"/>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="AttributeDomain">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="CommonTaxonomy"/>
+            <xsd:enumeration value="MPO"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="CategoryName">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="lang" type="LanguageCode" use="required"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="CurrencyPrice">
+        <xsd:simpleContent>
+            <xsd:extension base="BasePriceAmount">
+                <xsd:attribute name="currency" type="CurrencyCode" use="required"/>
+                <xsd:attribute name="modifier" type="xsd:string" use="optional"/>
+                <!-- additional type -->
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <!-- particular data elements -->
+
+    <xsd:simpleType name="BuyerEmailAddress">
+        <xsd:restriction base="xsd:normalizedString">
+            <xsd:pattern value="[\w\._\-]+@([\w_\-]+\.)+\w+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="CountryCode">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="2"/>
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="Condition">
+        <xsd:choice>
+            <xsd:element name="ConditionValue" type="ConditionDictionary"/>
+            <xsd:element name="ConditionFreeText" type="xsd:string"/>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:simpleType name="ConditionDictionary">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="New"/>
+            <xsd:enumeration value="UsedLikeNew"/>
+            <xsd:enumeration value="UsedVeryGood"/>
+            <xsd:enumeration value="UsedGood"/>
+            <xsd:enumeration value="UsedAcceptable"/>
+            <xsd:enumeration value="Refurbished"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="WeightUnit">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="GR"/>
+            <xsd:enumeration value="KG"/>
+            <xsd:enumeration value="OZ"/>
+            <xsd:enumeration value="LB"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="DimensionsUnit">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="MM"/>
+            <xsd:enumeration value="CM"/>
+            <xsd:enumeration value="M"/>
+            <xsd:enumeration value="IN"/>
+            <xsd:enumeration value="FT"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="ProductIDs">
+        <xsd:sequence>
+            <xsd:element name="UPC" type="UPC" minOccurs="0"/>
+            <xsd:element name="EAN" type="EAN" minOccurs="0"/>
+            <xsd:element name="GTIN" type="GTIN" minOccurs="0"/>
+            <xsd:element name="ISBN" type="ISBN" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="UPC">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="\d{8}|\d{12}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="EAN">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="\d{8}|\d{13}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="GTIN">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="\d{8}|\d{12}|\d{13}|\d{14}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="ISBN">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="\d{10}|\d{13}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="LanguageCode">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="2"/>
+            <xsd:maxLength value="5"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="CurrencyCode">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="3"/>
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="BasePriceAmount">
+        <xsd:restriction base="xsd:decimal">
+            <xsd:totalDigits value="20"/>
+            <xsd:fractionDigits value="2" fixed="true"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="OrderItemPriceType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ItemPrice"/>
+            <xsd:enumeration value="ItemTax"/>
+            <xsd:enumeration value="ShippingPrice"/>
+            <xsd:enumeration value="ShippingTax"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="TaxClassType">
+        <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+
+    <xsd:complexType name="DisposalFeeType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="lang" type="LanguageCode" use="required"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <!-- Header -->
+    <xsd:complexType name="Header">
+        <xsd:sequence>
+            <xsd:element name="DocumentGUID" type="xsd:string"/>
+            <xsd:element name="DocumentCreationDate" type="xsd:dateTime"/>
+            <xsd:element name="SenderID" type="xsd:string"/>
+            <xsd:element name="SenderName" type="xsd:string"/>
+            <xsd:element name="SourceChannelID" type="xsd:string"/>
+            <xsd:element name="ReceiverID" type="xsd:string"/>
+            <xsd:element name="DestinationChannelID" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Message">
+        <xsd:attribute name="MessageID" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:complexType name="ProductMessage">
+        <xsd:complexContent>
+            <xsd:extension base="Message">
+                <xsd:attribute name="SKU" type="ProductSKU" use="required"/>
+                <xsd:attribute name="StorefrontProductID" type="StorefrontProductIDType" use="optional"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:simpleType name="MessageAction">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="update"/>
+            <xsd:enumeration value="delete"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="ListingSource">
+        <xsd:sequence>
+            <xsd:element name="ListingID" type="ListingIDType"/>
+            <xsd:element name="SupplierName" type="xsd:string"/>
+            <xsd:element name="SupplierConditionNote" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="CommissionRate" type="CommissionRate" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="OwnListing" type="xsd:boolean" use="optional" default="false"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="ListingIDType">
+        <xsd:sequence>
+            <xsd:element name="EffectiveSupplierID" type="xsd:string"/>
+            <xsd:element name="Identifier" type="ListingIdValue"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="CatalogProductReference">
+        <xsd:sequence>
+            <xsd:element name="ProductSKU" type="ProductSKU"/>
+            <xsd:element name="StorefrontProductID" type="StorefrontProductIDType" minOccurs="0"/>
+            <xsd:element name="Condition" type="Condition" minOccurs="0"/>
+            <xsd:element name="CustomAttributes" type="CustomAttributes" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ProductSuppliers">
+        <xsd:sequence>
+            <xsd:element name="Supplier" type="Supplier" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Supplier">
+        <xsd:sequence>
+            <xsd:element name="SupplierName" type="xsd:string"/>
+            <xsd:element name="SupplierID" type="xsd:string"/>
+            <xsd:element name="SupplierConditionNote" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ProcessingResponse">
+        <xsd:sequence>
+            <xsd:element name="ResponseItem" type="ResponseItem" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="FeedResponse" type="FeedResponse" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FeedResponse">
+        <xsd:sequence>
+            <xsd:element name="Result" type="ProcessingResult"/>
+            <!-- only Failure may be here -->
+            <xsd:element name="Error" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ResponseItem">
+        <xsd:sequence>
+            <xsd:element name="FeedMessageID" type="xsd:string"/>
+            <xsd:element name="ID" type="DataID" maxOccurs="unbounded"/>
+            <xsd:element name="Result" type="ProcessingResult"/>
+            <xsd:element name="Error" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DataID">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="IDType" type="xsd:string" use="optional"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:simpleType name="ProcessingResult">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Success"/>
+            <xsd:enumeration value="Failure"/>
+            <xsd:enumeration value="Not processed"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="ProductResponse">
+        <xsd:sequence>
+            <xsd:element name="ProductResponseItem" type="ProductResponseItem" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ProductResponseItem">
+        <xsd:sequence>
+            <xsd:choice>
+                <xsd:element name="SKU" type="ProductSKU"/>
+                <xsd:element name="StorefrontProductID" type="StorefrontProductIDType"/>
+            </xsd:choice>
+            <xsd:element name="Result" type="ProcessingResult"/>
+            <xsd:element name="Message" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="NewProductAuthorizationResponse">
+        <xsd:sequence>
+            <xsd:element name="ProductResponseItem" type="NewProductAuthorizationResponseItem" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="NewProductAuthorizationResponseItem">
+        <xsd:sequence>
+            <xsd:element name="SKU" type="ProductSKU"/>
+            <xsd:element name="Result" type="ProcessingResult"/>
+            <xsd:element name="Message" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="Content" type="NewProductAuthorizationResponseContent" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="NewProductAuthorizationResponseContent">
+        <xsd:sequence>
+            <xsd:element name="StorefrontProductID" type="StorefrontProductIDType" minOccurs="0"/>
+            <xsd:element name="Attribute" type="ProductAttribute" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="LocalizedAttribute" type="ProductLocalizedAttribute" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="AttributeList" type="ProductAttributeList" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="LocalizedAttributeList" type="ProductLocalizedAttributeList" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ListingResponse">
+        <xsd:sequence>
+            <xsd:element name="ListingResponseItem" type="ListingResponseItemType" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ListingResponseItemType">
+        <xsd:sequence>
+            <xsd:element name="ListingID" type="ListingIDType"/>
+            <xsd:element name="Result" type="ProcessingResult"/>
+            <xsd:element name="Message" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="validationResults">
+        <xsd:sequence>
+            <xsd:element name="header" type="validationHeader" minOccurs="1" maxOccurs="1"/>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element name="validationResult" type="validationResult"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="validationResult">
+        <xsd:sequence>
+            <xsd:element name="message" type="validationMessage" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="objId" type="xsd:string"/>
+        <xsd:attribute name="storefrontProductId" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="validationHeader">
+        <xsd:attribute name="documentId" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="validationMessage">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="level" type="level"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:simpleType name="level">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="error"/>
+            <xsd:enumeration value="warning"/>
+            <xsd:enumeration value="info"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+
+</xsd:schema>

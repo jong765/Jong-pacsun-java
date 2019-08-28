@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<import resource="lolaApplicationContext.xml" />
+
+	<!-- log4j -->
+	<bean id="log4jInitialization"
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
+		<property name="targetMethod" value="initLogging" />
+		<property name="arguments">
+			<list>
+				<value>classpath:log4j-orderstatusexport.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Dao -->
+	<bean id="shippingTransactionDao"
+		class="com.pacsun.hingeto.orderstatusexport.dao.ShippingTransactionDaoImpl" />
+	<bean id="cancelTransactionDao"
+		class="com.pacsun.hingeto.orderstatusexport.dao.CancelTransactionDaoImpl" />
+
+	<!-- Util -->
+	<bean id="jaxbMarshallerUtil" class="com.pacsun.util.JAXBMarshallerUtil" />
+
+	<bean id="objectFactory" class="com.hingeto.api.ObjectFactory" />
+	<bean id="orderStatusExportProcess" class="com.pacsun.hingeto.orderstatusexport.process.OrderStatusExportProcess" />
+
+</beans>
