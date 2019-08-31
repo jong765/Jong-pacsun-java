@@ -966,7 +966,7 @@
     </xsd:complexType>
     <xsd:simpleType name="UPC">
         <xsd:restriction base="xsd:string">
-            <xsd:pattern value="\d{8}|\d{12}"/>
+            <xsd:pattern value="\d{8}|\d{12}|\d{13}|\d{14}"/>
         </xsd:restriction>
     </xsd:simpleType>
     <xsd:simpleType name="EAN">

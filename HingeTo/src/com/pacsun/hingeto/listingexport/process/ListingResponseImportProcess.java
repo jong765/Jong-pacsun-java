@@ -17,7 +17,6 @@ import com.pacsun.hingeto.listingexport.dao.InventoryDao;
 import com.pacsun.hingeto.listingresponseimport.builder.ListingResponseBuilder;
 import com.pacsun.hingeto.process.ListingProcess;
 import com.pacsun.util.DateFormatterUtil;
-import com.pacsun.util.EncodingUtil;
 import com.pacsun.util.FileUtils;
 import com.pacsun.util.JAXBMarshallerUtil;
 import com.pacsun.util.StackTrace;
@@ -49,8 +48,8 @@ public class ListingResponseImportProcess extends ListingProcess {
 	@Value("${sftp.user}")
 	protected String SFTP_USER;
 
-	@Value("${sftp.password.encoded}")
-	private String SFTP_PASSWORD_ENCODED;
+	@Value("${sftp.key.location}")
+	private String SFTP_KEY_LOCATION;
 
 	@Value("${sftp.listingresponse.remote.folder}")
 	private String SFTP_LISTING_RESPONSE_REMOTE_FOLDER;
@@ -134,7 +133,6 @@ public class ListingResponseImportProcess extends ListingProcess {
 		fileList.add(new File(this.QUEUE_FOLDER + xmlFileName));
 		try {
 			this.sftpUtil.setSftpDir(this.SFTP_LISTING_RESPONSE_REMOTE_FOLDER);
-			this.sftpUtil.setSftpPassword(EncodingUtil.decode(this.SFTP_PASSWORD_ENCODED));
 			this.sftpUtil.send(fileList);
 		} catch (Exception e) {
 			errorMessage = getClass().getName() + " : " + StackTrace.getStackTrace(e);

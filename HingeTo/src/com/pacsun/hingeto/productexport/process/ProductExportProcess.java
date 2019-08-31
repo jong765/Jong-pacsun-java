@@ -25,7 +25,6 @@ import com.pacsun.hingeto.exception.InvalidXmlException;
 import com.pacsun.hingeto.process.ListingProcess;
 import com.pacsun.hingeto.productexport.dao.ProductDao;
 import com.pacsun.hingeto.productexport.dto.ProductDto;
-import com.pacsun.util.EncodingUtil;
 import com.pacsun.util.JAXBUnmarshallerUtil;
 import com.pacsun.util.StackTrace;
 
@@ -37,8 +36,8 @@ public class ProductExportProcess extends ListingProcess {
 	@Value("${sftp.user}")
 	protected String SFTP_USER;
 
-	@Value("${sftp.password.encoded}")
-	private String SFTP_PASSWORD_ENCODED;
+	@Value("${sftp.key.location}")
+	private String SFTP_KEY_LOCATION;
 
 	@Value("${productexport.datafile.queue.folder}")
 	protected String DATA_QUEUE_FOLDER;
@@ -221,7 +220,6 @@ public class ProductExportProcess extends ListingProcess {
 	public void receiveFileSftp() throws Exception {
 		log.debug("Begin: receiveFileSftp()");
 		try {
-			this.sftpUtil.setSftpPassword(EncodingUtil.decode(this.SFTP_PASSWORD_ENCODED));
 			this.sftpUtil.setSftpDir(this.PRODUCT_EXPORT_REMOTE_FOLDER);
 			this.sftpUtil.receiveFileList(this.DATA_QUEUE_FOLDER, this.PRODUCT_EXPORT_FILE_PREFIX + "*.xml");
 			log.debug("End: receiveFileSftp()");

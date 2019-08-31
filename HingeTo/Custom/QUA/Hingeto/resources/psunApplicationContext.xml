@@ -39,6 +39,7 @@
 	<bean id="sftpUtil" class="com.pacsun.util.SftpUtil">
 		<property name="sftpHost" value="${sftp.host}"/>
 		<property name="sftpUser" value="${sftp.user}"/>
+		<property name="sftpKeyLoc" value="${sftp.key.location}"/>
 	</bean>
 	<bean id="schemaValidator" class="com.pacsun.util.SchemaValidator" />
 

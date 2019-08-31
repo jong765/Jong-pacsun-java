@@ -22,6 +22,7 @@ public class SftpUtil {
 	private String sftpUser;
 	private String sftpPassword;
 	private String sftpDir;
+	private String sftpKeyLoc;
 	private static final int SFTPPORT = 22;
 
 	private Session session;
@@ -110,11 +111,13 @@ public class SftpUtil {
 	private void initialize() throws Exception {
 
 		jsch = new JSch();
-		log.debug("sftpUser=" + sftpUser + ",sftpHost=" + sftpHost + ",sftpPort=" + SFTPPORT + ",sftpPassword="
-				+ sftpPassword);
+		if (this.sftpKeyLoc != null)
+			jsch.addIdentity(this.sftpKeyLoc);
+		log.debug("sftpUser=" + sftpUser + ",sftpHost=" + sftpHost + ",sftpPort=" + SFTPPORT + ",sftpPassword=" + sftpPassword);
 		try {
 			session = jsch.getSession(sftpUser, sftpHost, SFTPPORT);
-			session.setPassword(sftpPassword);
+			if (this.sftpKeyLoc == null)
+				session.setPassword(sftpPassword);
 			config = new java.util.Properties();
 			config.put("StrictHostKeyChecking", "no");
 			session.setConfig(config);
@@ -179,10 +182,12 @@ public class SftpUtil {
 		ChannelSftp channelSftp = null;
 		try {
 			JSch jsch = new JSch();
-			log.debug("sftpUser=" + sftpUser + ",sftpHost=" + sftpHost + ",sftpPort=" + SFTPPORT + ",sftpPassword="
-					+ sftpPassword);
+			if (this.sftpKeyLoc != null)
+				jsch.addIdentity(this.sftpKeyLoc);
+			log.debug("sftpUser=" + sftpUser + ",sftpHost=" + sftpHost + ",sftpPort=" + SFTPPORT + ",sftpPassword=" + sftpPassword);
 			session = jsch.getSession(sftpUser, sftpHost, SFTPPORT);
-			session.setPassword(sftpPassword);
+			if (this.sftpKeyLoc == null)
+				session.setPassword(sftpPassword);
 			java.util.Properties config = new java.util.Properties();
 			config.put("StrictHostKeyChecking", "no");
 			session.setConfig(config);
@@ -215,8 +220,11 @@ public class SftpUtil {
 		ChannelSftp channelSftp = null;
 		try {
 			JSch jsch = new JSch();
+			if (this.sftpKeyLoc != null)
+				jsch.addIdentity(this.sftpKeyLoc);
 			session = jsch.getSession(sftpUser, sftpHost, SFTPPORT);
-			session.setPassword(sftpPassword);
+			if (this.sftpKeyLoc == null)
+				session.setPassword(sftpPassword);
 			java.util.Properties config = new java.util.Properties();
 			config.put("StrictHostKeyChecking", "no");
 			session.setConfig(config);
@@ -239,6 +247,14 @@ public class SftpUtil {
 			channel.disconnect();
 			session.disconnect();
 		}
+	}
+
+	public String getSftpKeyLoc() {
+		return sftpKeyLoc;
+	}
+
+	public void setSftpKeyLoc(String sftpKeyLoc) {
+		this.sftpKeyLoc = sftpKeyLoc;
 	}
 
 }

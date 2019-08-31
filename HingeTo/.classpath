@@ -3,25 +3,31 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="testsrc"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/activation.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/commons-io-2.0.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/commons-lang3-3.1.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/commons-logging.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/javax.xml.stream-1.0.1.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/jaxb-api.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/jaxb-impl.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/jaxb-xjc.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/joda-time-2.1.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/jsch-0.1.54.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/jt400.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/mail.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/spring-beans-3.2.3.RELEASE.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/spring-context-3.2.3.RELEASE.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/spring-core-3.2.3.RELEASE.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/spring-expression-3.2.3.RELEASE.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/spring-jdbc-3.2.3.RELEASE.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/junit-4.6.jar"/>
-	<classpathentry kind="lib" path="Custom/QUA/lib/spring-test-3.2.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/activation.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/commons-io-2.0.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/javax.xml.stream-1.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/jaxb-api.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/jaxb-impl.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/jaxb-xjc.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/joda-time-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/jsch-0.1.54.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/jt400.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/junit-4.6.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/mail.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/spring-beans-3.2.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/spring-context-3.2.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/spring-core-3.2.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/spring-expression-3.2.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/spring-jdbc-3.2.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/spring-test-3.2.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="Custom/QUA/Hingeto/feed"/>
+	<classpathentry kind="lib" path="Custom/QUA/Hingeto/logs"/>
+	<classpathentry kind="lib" path="Custom/QUA/Hingeto/privateKey"/>
+	<classpathentry kind="lib" path="Custom/QUA/Hingeto/properties"/>
+	<classpathentry kind="lib" path="Custom/QUA/Hingeto/resources"/>
+	<classpathentry kind="lib" path="Custom/QUA/Hingeto/xsd"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
