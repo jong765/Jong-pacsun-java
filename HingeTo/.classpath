@@ -25,7 +25,6 @@
 	<classpathentry kind="lib" path="C:/git/Jong-pacsun-java/HingeTo/Custom/QUA/Hingeto/lib/spring-test-3.2.3.RELEASE.jar"/>
 	<classpathentry kind="lib" path="Custom/QUA/Hingeto/feed"/>
 	<classpathentry kind="lib" path="Custom/QUA/Hingeto/logs"/>
-	<classpathentry kind="lib" path="Custom/QUA/Hingeto/privateKey"/>
 	<classpathentry kind="lib" path="Custom/QUA/Hingeto/properties"/>
 	<classpathentry kind="lib" path="Custom/QUA/Hingeto/resources"/>
 	<classpathentry kind="lib" path="Custom/QUA/Hingeto/xsd"/>

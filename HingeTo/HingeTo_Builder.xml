@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="HingeTo" default="HingeTo" basedir=".">
+	<target name="HingeTo" description="HingeTo">
+		<jar jarfile="C:\git\Jong-pacsun-java\HingeTo\deploy\ps_hingeto_jaxb.jar" includes=
+	                  "**/com/hingeto/api/*.class" basedir="bin" />
+		<jar jarfile="C:\git\Jong-pacsun-java\HingeTo\deploy\ps_hingeto_common.jar" includes=
+			         "**/com/pacsun/constants/*.class,
+			          **/com/pacsun/hingeto/builder/*.class,
+			          **/com/pacsun/hingeto/dao/*.class,
+			          **/com/pacsun/hingeto/exception/*.class,
+					  **/com/pacsun/hingeto/process/*.class,
+			          **/com/pacsun/util/*.class" basedir="bin" />
+		<jar jarfile="C:\git\Jong-pacsun-java\HingeTo\deploy\ps_hingeto_imagedownload.jar" includes=
+					 "**/com/pacsun/hingeto/imagedownload/dto/*.class,
+			          **/com/pacsun/hingeto/imagedownload/process/*.class" basedir="bin" />
+		<jar jarfile="C:\git\Jong-pacsun-java\HingeTo\deploy\ps_hingeto_listingexport.jar" includes=
+					 "**/com/pacsun/hingeto/listingexport/dao/*.class,
+			          **/com/pacsun/hingeto/listingexport/dto/*.class,
+			          **/com/pacsun/hingeto/listingexport/process/*.class,
+					  **/com/pacsun/hingeto/listingresponseimport/builder/*.class" basedir="bin" />
+		<jar jarfile="C:\git\Jong-pacsun-java\HingeTo\deploy\ps_hingeto_productexport.jar" includes=
+					 "**/com/pacsun/hingeto/productexport/dao/*.class,
+					  **/com/pacsun/hingeto/productexport/dto/*.class,
+					  **/com/pacsun/hingeto/productexport/process/*.class" basedir="bin" />
+	</target>
+</project>
